@@ -25,13 +25,6 @@ public class StatisticManager {
 
     private final Map<String, StatisticalInfo> dataMap = new HashMap<>();
 
-    private static final String HEADER_TABLE =
-            "-----------------------------------------------------------------\n" +
-            "Peak Code  | Number of Participants  | Total Cost\n" +
-            "-----------------------------------------------------------------";
-    private static final String FOOTER_TABLE =
-            "-----------------------------------------------------------------";
-
     public StatisticManager() {
     }
 
@@ -56,21 +49,6 @@ public class StatisticManager {
                 dataMap.put(code, new StatisticalInfo(code, 1, student.getTuitionFee()));
             }
         }
-    }
-
-    /**
-     * Hiển thị bảng thống kê ra console.
-     */
-    public void show() {
-        if (dataMap.isEmpty()) {
-            System.out.println("No statistical data available.");
-            return;
-        }
-        System.out.println(HEADER_TABLE);
-        for (StatisticalInfo info : dataMap.values()) {
-            System.out.println(info);
-        }
-        System.out.println(FOOTER_TABLE);
     }
 
     public Map<String, StatisticalInfo> getDataMap() {

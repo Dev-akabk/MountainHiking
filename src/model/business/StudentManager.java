@@ -23,17 +23,6 @@ public class StudentManager {
     private boolean isSaved;
     private List<Student> list = new ArrayList<>();
 
-    /*
-     * HEADER/FOOTER cập nhật thêm cột Email so với bản gốc.
-     * Dùng static final vì đây là hằng số không đổi giữa các instance.
-     */
-    private static final String HEADER_TABLE
-            = "----------------------------------------------------------------------------------------------\n"
-            + "Student ID | Name            | Phone       | Email                    | Peak Code | Fee\n"
-            + "----------------------------------------------------------------------------------------------";
-    private static final String FOOTER_TABLE
-            = "----------------------------------------------------------------------------------------------";
-
     public StudentManager() {
         this.pathFile = "data/registrations.dat";
         this.isSaved = true;
@@ -117,31 +106,6 @@ public class StudentManager {
             }
         }
         return result;
-    }
-
-    // ==================== Display ====================
-
-    public void showAll() {
-        showAll(this.list);
-    }
-
-    public void showAll(List<Student> displayList) {
-        if (displayList.isEmpty()) {
-            System.out.println("No students have registered yet.");
-            return;
-        }
-        System.out.println(HEADER_TABLE);
-        for (Student student : displayList) {
-            System.out.println(student);
-        }
-        System.out.println(FOOTER_TABLE);
-    }
-
-    // ==================== Statistics ====================
-
-    public void statisticalizeByMountainPeak() {
-        StatisticManager statistic = new StatisticManager(this.list);
-        statistic.show();
     }
 
     // ==================== File I/O ====================

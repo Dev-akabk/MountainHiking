@@ -1,10 +1,12 @@
 package controller;
 
+import model.business.StatisticManager;
 import model.business.MountainManager;
 import model.business.StudentManager;
 import model.entity.Student;
 import tools.Inputter;
 import view.Menu;
+
 
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class Controller {
     private final Inputter inputter = new Inputter();
     private final StudentManager studentManager = new StudentManager();
     private final MountainManager mountainManager = new MountainManager();
-
+    private final StatisticManager statisticManager = new StatisticManager();
     public void run() {
         mountainManager.readFromFile();
         studentManager.readFromFile();
@@ -45,7 +47,7 @@ public class Controller {
                     handleUpdateRegistration();
                     break;
                 case 3:
-                    studentManager.showAll();
+                    menu.displayStudentList(studentManager.getList());
                     break;
                 case 4:
                     handleDeleteRegistration();
@@ -57,7 +59,8 @@ public class Controller {
                     handleFilterByCampus();
                     break;
                 case 7:
-                    studentManager.statisticalizeByMountainPeak();
+                    statisticManager.statisticalize(studentManager.getList());
+                    menu.displayStatistics(statisticManager.getDataMap().values());
                     break;
                 case 8:
                     studentManager.saveToFile();
@@ -139,7 +142,7 @@ public class Controller {
     private void handleSearchByName() {
         String searchName = inputter.getString("Enter name to search: ");
         List<Student> searchResult = studentManager.searchByName(searchName);
-        studentManager.showAll(searchResult);
+        menu.displayStudentList(searchResult);
     }
 
     /**
@@ -148,9 +151,9 @@ public class Controller {
     private void handleFilterByCampus() {
         String campusCode = inputter.getString("Enter Campus Code (e.g. CE, DE, HE, SE, QE): ");
         List<Student> filterResult = studentManager.filterByCampusCode(campusCode);
-        studentManager.showAll(filterResult);
+        menu.displayStudentList(filterResult);
     }
-
+    
     /**
      * Case 9: Thoát chương trình.
      * Fail-Safe: nếu có dữ liệu chưa lưu → hỏi user xác nhận trước khi thoát.
