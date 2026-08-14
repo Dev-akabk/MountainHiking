@@ -2,12 +2,6 @@ package model.entity;
 
 import java.io.Serializable;
 
-/**
- * Entity lưu trữ thông tin đăng ký leo núi của sinh viên.
- * Implements Serializable để hỗ trợ ghi/đọc đối tượng qua ObjectOutputStream/ObjectInputStream.
- *
- * @author Legion
- */
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;

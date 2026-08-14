@@ -4,10 +4,6 @@ import model.entity.Student;
 
 import java.util.Scanner;
 
-/**
- * Lớp tiện ích xử lý toàn bộ nhập liệu từ Console.
- * Kết hợp với Acceptable (Utility Class) để validate dữ liệu theo Regex.
- */
 public class Inputter {
 
     private Scanner scanner;
@@ -16,19 +12,12 @@ public class Inputter {
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * Nhập chuỗi từ bàn phím.
-     */
     public String getString(String mess) {
         System.out.print(mess);
         return scanner.nextLine();
     }
 
-    /**
-     * Nhập số nguyên — lặp liên tục cho đến khi user nhập đúng định dạng.
-     * Code cũ: trả về 0 nếu nhập sai (âm thầm, user không biết mình sai).
-     * Code mới: bắt buộc nhập lại, có thông báo lỗi rõ ràng.
-     */
+
     public int getInt(String mess) {
         while (true) {
             String temp = getString(mess);
@@ -39,9 +28,7 @@ public class Inputter {
         }
     }
 
-    /**
-     * Nhập số thực — lặp liên tục cho đến khi user nhập đúng định dạng.
-     */
+
     public double getDouble(String mess) {
         while (true) {
             String temp = getString(mess);
@@ -52,10 +39,7 @@ public class Inputter {
         }
     }
 
-    /**
-     * Nhập chuỗi và lặp cho đến khi khớp pattern Regex.
-     * Đã có sẵn từ code gốc — logic tốt, giữ nguyên.
-     */
+
     public String inputLoop(String mess, String pattern) {
         String result;
         boolean running;
@@ -69,28 +53,6 @@ public class Inputter {
         return result.trim();
     }
 
-    /**
-     * Nhập toàn bộ thông tin Student.
-     * Dùng chung cho cả New Registration (isUpdate=false)
-     * và Update Registration (isUpdate=true).
-     *
-     * Khi isUpdate=true và oldStudent != null:
-     *   - Student ID: giữ nguyên ID cũ (không cho đổi)
-     *   - Các trường khác: nhấn Enter để giữ giá trị cũ,
-     *     hoặc nhập mới để thay thế.
-     *
-     * Khi isUpdate=false:
-     *   - Student ID: bắt buộc nhập mới, validate theo Regex.
-     *   - Các trường khác: bắt buộc nhập, validate theo Regex.
-     *
-     * Tính tuitionFee:
-     *   - Mặc định: 6,000,000
-     *   - Nếu SĐT thuộc đầu số Viettel hoặc VNPT → giảm 35% (nhân 0.65)
-     *
-     * @param isUpdate   true nếu đang cập nhật, false nếu đăng ký mới
-     * @param oldStudent đối tượng Student cũ (chỉ cần khi isUpdate=true)
-     * @return đối tượng Student mới chứa thông tin đã nhập
-     */
     public Student enterStudentInfo(boolean isUpdate, Student oldStudent) {
         // --- Student ID ---
         String id;
@@ -145,7 +107,7 @@ public class Inputter {
             mountainCode = getString("Enter Mountain Code: ");
         }
 
-        // --- Tuition Fee (auto-calculated) ---
+        // --- Tuition Fee ---
         double tuitionFee = 6_000_000;
         if (Acceptable.isValid(phone, Acceptable.VIETTEL_VALID)
                 || Acceptable.isValid(phone, Acceptable.VNPT_VALID)) {
@@ -156,9 +118,7 @@ public class Inputter {
         return new Student(id, name, phone, email, mountainCode, tuitionFee);
     }
 
-    /**
-     * Overload cho trường hợp đăng ký mới (không cần truyền oldStudent).
-     */
+
     public Student enterStudentInfo(boolean isUpdate) {
         return enterStudentInfo(isUpdate, null);
     }

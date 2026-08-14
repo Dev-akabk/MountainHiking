@@ -1,10 +1,5 @@
 package model.entity;
 
-/**
- * Entity chứa thông tin một đỉnh núi.
- *
- * @author Legion
- */
 public class Mountain {
 
     private String mountainCode;

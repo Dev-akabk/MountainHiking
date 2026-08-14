@@ -1,7 +1,5 @@
 package model.business;
 
-import model.entity.Student;
-
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.entity.Student;
 
-/**
- * Quản lý danh sách đăng ký (CRUD) và lưu trữ file nhị phân (.dat).
- */
+
+
+
 public class StudentManager {
 
     private final String pathFile;
@@ -32,8 +31,8 @@ public class StudentManager {
         return isSaved;
     }
 
-    // ==================== CRUD Operations ====================
 
+    
     public void add(Student student) {
         list.add(student);
         this.isSaved = false;
@@ -57,8 +56,7 @@ public class StudentManager {
         }
     }
 
-    // ==================== Search & Filter ====================
-
+    
     public Student searchById(String id) {
         for (Student student : list) {
             if (student.getId().equalsIgnoreCase(id)) {
@@ -68,15 +66,6 @@ public class StudentManager {
         return null;
     }
 
-    /**
-     * Tìm kiếm sinh viên theo tên (case-insensitive, partial match).
-     *
-     * FIX: Code cũ chỉ toLowerCase() vế trái nhưng giữ nguyên vế phải:
-     *   student.getName().toLowerCase().contains(name)
-     *   → "nguyen van an".contains("AN") = false (sai!)
-     *
-     * Code mới: chuẩn hóa CẢ HAI vế về lowercase trước khi so sánh.
-     */
     public List<Student> searchByName(String name) {
         List<Student> result = new ArrayList<>();
         for (Student student : list) {
@@ -87,16 +76,6 @@ public class StudentManager {
         return result;
     }
 
-    /**
-     * Lọc sinh viên theo mã campus (2 ký tự đầu của Student ID).
-     * Ví dụ: campusCode = "CE" → lọc tất cả student có ID bắt đầu bằng "CE".
-     *
-     * FIX: Code cũ duyệt trên `result` (danh sách rỗng vừa khởi tạo)
-     *   thay vì `this.list` (nguồn dữ liệu chính) → luôn trả về rỗng!
-     *
-     *   for (Student student : result)   ← BUG: result rỗng, vòng lặp không chạy
-     *   for (Student student : list)     ← FIX: duyệt trên danh sách tổng
-     */
     public List<Student> filterByCampusCode(String campusCode) {
         List<Student> result = new ArrayList<>();
         for (Student student : list) {
@@ -108,12 +87,6 @@ public class StudentManager {
         return result;
     }
 
-    // ==================== File I/O ====================
-
-    /**
-     * Lưu danh sách Student ra file nhị phân (.dat) bằng ObjectOutputStream.
-     * Yêu cầu: Student phải implements Serializable, nếu không → NotSerializableException.
-     */
     public void saveToFile() {
         if (this.isSaved) {
             return;
@@ -129,11 +102,6 @@ public class StudentManager {
         }
     }
 
-    /**
-     * Đọc danh sách Student từ file nhị phân (.dat) bằng ObjectInputStream.
-     * Dùng EOFException để phát hiện hết file (cách tiêu chuẩn khi
-     * ghi nhiều object liên tiếp bằng ObjectOutputStream).
-     */
     public void readFromFile() {
         File file = new File(this.pathFile);
         if (!file.exists()) {
@@ -147,7 +115,6 @@ public class StudentManager {
                     Student student = (Student) ois.readObject();
                     list.add(student);
                 } catch (EOFException e) {
-                    // Đã đọc hết file — thoát vòng lặp
                     break;
                 }
             }
@@ -156,13 +123,6 @@ public class StudentManager {
         }
     }
 
-    // ==================== Getter ====================
-
-    /**
-     * Trả về danh sách sinh viên.
-     * Khai báo kiểu List<> (interface) thay vì ArrayList<> (implementation)
-     * → Program to Interface, not Implementation.
-     */
     public List<Student> getList() {
         return list;
     }
