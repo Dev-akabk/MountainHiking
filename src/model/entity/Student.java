@@ -75,7 +75,7 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%-10s| %-15s| %-12s| %-25s| %-10s| %,.0f",
+        return String.format("%-10s| %-20s| %-12s| %-25s| %-10s| %,.0f",
                 id, name, phone, email, mountainCode, tuitionFee);
     }
 }

@@ -44,7 +44,7 @@ public class StatisticalInfo {
     }
     @Override
     public String toString() {
-        return String.format("%-10s| %-10d| %15.2f",
+        return String.format("%-10s| %-24d| %-15.2f",
                 mountainCode, numOfStudent, totalCost);
     }
 }
