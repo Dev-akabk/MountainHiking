@@ -7,20 +7,26 @@ package model.entity;
 public class StatisticalInfo {
 
     private String mountainCode;
+    private String mountainName;
     private int numOfStudent;
     private double totalCost;
 
     public StatisticalInfo() {
     }
 
-    public StatisticalInfo(String mountainCode, int numOfStudent, double totalCost) {
+    public StatisticalInfo(String mountainName, String mountainCode, int numOfStudent, double totalCost) {
+        this.mountainName = mountainName;
         this.mountainCode = mountainCode;
         this.numOfStudent = numOfStudent;
         this.totalCost = totalCost;
     }
 
     public String getMountainCode() {
-        return mountainCode;
+        if (Integer.valueOf(mountainCode) < 10) {
+            return (String) ("MT0" + mountainCode);
+        } else {
+            return "MT" + mountainCode;
+        }
     }
 
     public void setMountainCode(String mountainCode) {
@@ -42,9 +48,18 @@ public class StatisticalInfo {
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
+
+    public String getMountainName() {
+        return mountainName;
+    }
+
+    public void setMountainName(String mountainName) {
+        this.mountainName = mountainName;
+    }
+
     @Override
     public String toString() {
-        return String.format("%-10s| %-24d| %-15.2f",
-                mountainCode, numOfStudent, totalCost);
+        return String.format("%-20s|%-10s| %-24d| %-15.2f",
+                mountainName, getMountainCode(), numOfStudent, totalCost);
     }
 }

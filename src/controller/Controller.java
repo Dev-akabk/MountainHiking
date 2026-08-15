@@ -46,7 +46,7 @@ public class Controller {
                     handleFilterByCampus();
                     break;
                 case 7:
-                    statisticManager.statisticalize(studentManager.getList());
+                    statisticManager.statisticalize(studentManager.getList(), mountainManager.getList());
                     menu.displayStatistics(statisticManager.getDataMap().values());
                     break;
                 case 8:

@@ -87,12 +87,6 @@ public class StudentManager {
         return result;
     }
     
-//    List<Student> getTopSpendersByMountain(String mountainCode) {
-//        for (Student student : list) {
-//            
-//        }
-//    }
-    
     public void saveToFile() {
         if (this.isSaved) {
             return;
