@@ -65,21 +65,17 @@ public class Controller {
 
     private void handleNewRegistration() {
         Student newStudent = inputter.enterStudentInfo(false);
-        boolean running = true;
-        do {
-            if (newStudent == null) {
-                return;
-            }
-            if (studentManager.searchById(newStudent.getId()) != null) {
-                menu.showMessage("Error: Student ID '" + newStudent.getId() + "' already exists!");
-                return;
-            }
-            if (!mountainManager.isValidMountainCode(newStudent.getMountainCode())) {
-                menu.showMessage("Error: Mountain code '" + newStudent.getMountainCode() + "' does not exist!");
-                return;
-            }
-            running = false;
-        } while (running); 
+        if (newStudent == null) {
+            return;
+        }
+        if (studentManager.searchById(newStudent.getId()) != null) {
+            menu.showMessage("Error: Student ID '" + newStudent.getId() + "' already exists!");
+            return;
+        }
+        if (!mountainManager.isValidMountainCode(newStudent.getMountainCode())) {
+            menu.showMessage("Error: Mountain code '" + newStudent.getMountainCode() + "' does not exist!");
+            return;
+        }
         studentManager.add(newStudent);
         menu.showMessage("Registration successful!");
     }

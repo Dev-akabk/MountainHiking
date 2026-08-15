@@ -22,11 +22,7 @@ public class StatisticalInfo {
     }
 
     public String getMountainCode() {
-        if (Integer.valueOf(mountainCode) < 10) {
-            return (String) ("MT0" + mountainCode);
-        } else {
-            return "MT" + mountainCode;
-        }
+        return mountainCode;
     }
 
     public void setMountainCode(String mountainCode) {

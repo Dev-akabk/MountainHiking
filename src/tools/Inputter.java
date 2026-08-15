@@ -1,6 +1,7 @@
 package tools;
 
 import model.entity.Student;
+import model.business.MountainManager;
 
 import java.util.Scanner;
 
@@ -96,15 +97,12 @@ public class Inputter {
             email = inputLoop("Enter Email: ", Acceptable.EMAIL_VALID);
         }
 
-        // --- Mountain Code ---
         String mountainCode;
         if (isUpdate && oldStudent != null) {
-            mountainCode = getString("Enter Mountain Code (Enter to keep '" + oldStudent.getMountainCode() + "'): ");
-            if (mountainCode.trim().isEmpty()) {
-                mountainCode = oldStudent.getMountainCode();
-            }
+            String input = getString("Enter Mountain Code (Enter to keep '" + oldStudent.getMountainCode() + "'): ");
+            mountainCode = input.trim().isEmpty() ? oldStudent.getMountainCode() : MountainManager.normalize(input);
         } else {
-            mountainCode = getString("Enter Mountain Code: ");
+            mountainCode = MountainManager.normalize(getString("Enter Mountain Code (e.g. MT01): "));
         }
 
         // --- Tuition Fee ---

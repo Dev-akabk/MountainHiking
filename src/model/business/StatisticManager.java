@@ -22,9 +22,10 @@ public class StatisticManager {
 
     //get mountain name by code mountain of student list
     public String getMountainNameByCode(String code, List<Mountain> mountainList) {
-        if (mountainList != null & !mountainList.isEmpty()) {
+        if (mountainList != null && !mountainList.isEmpty()) {
+            String normalizedCode = MountainManager.normalize(code);
             for (Mountain mountain : mountainList) {
-                if (mountain.getMountainCode().trim().substring(2).equalsIgnoreCase(code.trim())) {
+                if (MountainManager.normalize(mountain.getMountainCode()).equalsIgnoreCase(normalizedCode)) {
                     return mountain.getMountainName();
                 }
             }
