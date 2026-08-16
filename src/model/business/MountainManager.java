@@ -8,8 +8,7 @@ import java.io.IOException;
 import model.entity.Mountain;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import tools.LogWritter;
 
 
 public class MountainManager {
@@ -61,7 +60,9 @@ public class MountainManager {
     public void readFromFile() {
         File file = new File(this.pathFile);
         if (!file.exists()) {
-            System.out.println("MountainList.csv file not found!");
+            String msg = "MountainList.csv file not found!";
+            System.err.println(msg);
+            LogWritter.writeLog(msg);
             return;
         }
 
@@ -84,9 +85,13 @@ public class MountainManager {
                 }
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MountainManager.class.getName()).log(Level.SEVERE, null, ex);
+            String msg = "MountainList.csv not found: " + ex.getMessage();
+            System.err.println(msg);
+            LogWritter.writeLog(msg);
         } catch (IOException ex) {
-            Logger.getLogger(MountainManager.class.getName()).log(Level.SEVERE, null, ex);
+            String msg = "Error reading MountainList.csv: " + ex.getMessage();
+            System.err.println(msg);
+            LogWritter.writeLog(msg);
         }
     }
 

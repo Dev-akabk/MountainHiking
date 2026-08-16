@@ -10,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import tools.LogWritter;
 import model.entity.Student;
 
 
@@ -98,7 +98,9 @@ public class StudentManager {
             }
             this.isSaved = true;
         } catch (IOException exception) {
-            Logger.getLogger(StudentManager.class.getName()).log(Level.SEVERE, null, exception);
+            String msg = "Error saving registrations.dat: " + exception.getMessage();
+            System.err.println(msg);
+            LogWritter.writeLog(msg);
         }
     }
 
@@ -119,7 +121,9 @@ public class StudentManager {
                 }
             }
         } catch (ClassNotFoundException | IOException exception) {
-            Logger.getLogger(StudentManager.class.getName()).log(Level.SEVERE, null, exception);
+            String msg = "Error reading registrations.dat: " + exception.getMessage();
+            System.err.println(msg);
+            LogWritter.writeLog(msg);
         }
     }
 
