@@ -1,6 +1,5 @@
 package model.business;
 
-import java.util.ArrayList;
 import model.entity.Student;
 import model.entity.StatisticalInfo;
 
