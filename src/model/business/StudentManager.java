@@ -23,7 +23,7 @@ public class StudentManager {
     private List<Student> list = new ArrayList<>();
 
     public StudentManager() {
-        this.pathFile = "data/registrations.dat";
+        this.pathFile = "src/data/registrations.dat";
         this.isSaved = true;
     }
 

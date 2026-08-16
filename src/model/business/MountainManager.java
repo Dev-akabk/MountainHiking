@@ -18,23 +18,24 @@ public class MountainManager {
     private List<Mountain> list = new ArrayList<>();
 
     public MountainManager() {
-        this.pathFile = "data/MountainList.csv";
+        this.pathFile = "src/data/MountainList.csv";
     }
 
     /**
-     * Chuẩn hóa mountain code về dạng "MTxx" (VD: "1"->"MT01", "01"->"MT01", "MT1"->"MT01", "MT01"->"MT01").
+     * Normalize mountain code to "MTxx" format.
+     * Examples: "1"->"MT01", "01"->"MT01", "MT1"->"MT01", "MT01"->"MT01", "10"->"MT10"
      */
     public static String normalize(String code) {
         if (code == null) return "";
         String trimmed = code.trim().toUpperCase();
-        // Bỏ prefix "MT" nếu có
+        // Strip "MT" prefix if present
         String numeric = trimmed.startsWith("MT") ? trimmed.substring(2) : trimmed;
-        // Loại bỏ số 0 đứng đầu rồi parse để chuẩn hóa, sau đó format lại với pad 0
+        // Parse to int then format with zero-padding
         try {
             int num = Integer.parseInt(numeric);
             return String.format("MT%02d", num);
         } catch (NumberFormatException e) {
-            return trimmed; // Không parse được thì giữ nguyên
+            return trimmed; // Cannot parse, return as-is
         }
     }
 
@@ -59,7 +60,7 @@ public class MountainManager {
             return null;
         }
         String description = (parts.length >= 4) ? parts[3].trim() : "";
-        // Chuẩn hóa code ngay khi đọc CSV: "1"->"MT01", "01"->"MT01", "10"->"MT10"
+        // Normalize code from CSV: "1"->"MT01", "01"->"MT01", "10"->"MT10"
         String mountainCode = normalize(parts[0].trim());
         return new Mountain(mountainCode, parts[1].trim(), parts[2].trim(), description);
     }
