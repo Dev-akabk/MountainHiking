@@ -19,7 +19,6 @@ public class StatisticManager {
         statisticalize(list, mountainList);
     }
 
-    //get mountain name by code mountain of student list
     public String getMountainNameByCode(String code, List<Mountain> mountainList) {
         if (mountainList != null && !mountainList.isEmpty()) {
             String normalizedCode = MountainManager.normalize(code);

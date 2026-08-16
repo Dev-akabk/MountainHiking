@@ -21,21 +21,15 @@ public class MountainManager {
         this.pathFile = "src/data/MountainList.csv";
     }
 
-    /**
-     * Normalize mountain code to "MTxx" format.
-     * Examples: "1"->"MT01", "01"->"MT01", "MT1"->"MT01", "MT01"->"MT01", "10"->"MT10"
-     */
     public static String normalize(String code) {
         if (code == null) return "";
         String trimmed = code.trim().toUpperCase();
-        // Strip "MT" prefix if present
         String numeric = trimmed.startsWith("MT") ? trimmed.substring(2) : trimmed;
-        // Parse to int then format with zero-padding
         try {
             int num = Integer.parseInt(numeric);
             return String.format("MT%02d", num);
         } catch (NumberFormatException e) {
-            return trimmed; // Cannot parse, return as-is
+            return trimmed; 
         }
     }
 
@@ -60,7 +54,6 @@ public class MountainManager {
             return null;
         }
         String description = (parts.length >= 4) ? parts[3].trim() : "";
-        // Normalize code from CSV: "1"->"MT01", "01"->"MT01", "10"->"MT10"
         String mountainCode = normalize(parts[0].trim());
         return new Mountain(mountainCode, parts[1].trim(), parts[2].trim(), description);
     }
