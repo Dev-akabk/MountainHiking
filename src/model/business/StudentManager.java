@@ -97,9 +97,9 @@ public class StudentManager {
             }
             this.isSaved = true;
         } catch (IOException exception) {
-            String msg = "Error saving registrations.dat: " + exception.getMessage();
-            System.err.println(msg);
-            LogWritter.writeLog(msg);
+            String message = "Error saving registrations.dat: " + exception.getMessage();
+            System.err.println(message);
+            LogWritter.writeLog(message);
         }
     }
 
@@ -120,9 +120,9 @@ public class StudentManager {
                 }
             }
         } catch (ClassNotFoundException | IOException exception) {
-            String msg = "Error reading registrations.dat: " + exception.getMessage();
-            System.err.println(msg);
-            LogWritter.writeLog(msg);
+            String message = "Error reading registrations.dat: " + exception.getMessage();
+            System.err.println(message);
+            LogWritter.writeLog(message);
         }
     }
 

@@ -13,15 +13,15 @@ public class Inputter {
         this.scanner = new Scanner(System.in);
     }
 
-    public String getString(String mess) {
-        System.out.print(mess);
+    public String getString(String message) {
+        System.out.print(message);
         return scanner.nextLine();
     }
 
 
-    public int getInt(String mess) {
+    public int getInt(String message) {
         while (true) {
-            String temp = getString(mess);
+            String temp = getString(message);
             if (Acceptable.isValid(temp, Acceptable.INTEGER_VALID)) {
                 return Integer.parseInt(temp);
             }
@@ -30,9 +30,9 @@ public class Inputter {
     }
 
 
-    public double getDouble(String mess) {
+    public double getDouble(String message) {
         while (true) {
-            String temp = getString(mess);
+            String temp = getString(message);
             if (Acceptable.isValid(temp, Acceptable.DOUBLE_VALID)) {
                 return Double.parseDouble(temp);
             }
@@ -41,11 +41,11 @@ public class Inputter {
     }
 
 
-    public String inputLoop(String mess, String pattern) {
+    public String inputLoop(String message, String pattern) {
         String result;
         boolean running;
         do {
-            result = getString(mess);
+            result = getString(message);
             running = !Acceptable.isValid(result, pattern);
             if (running) {
                 System.out.println("Data is invalid! Re-enter ...");

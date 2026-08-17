@@ -1,0 +1,4 @@
+[17-08-2026 11:25:21] UNCAUGHT EXCEPTION in thread [main]: java.lang.RuntimeException - Uncompilable code - cannot find symbol
+  symbol:   method getTuitionFee()
+  location: variable student of type model.entity.Student
+[17-08-2026 11:36:08] UNCAUGHT EXCEPTION in thread [main]:java.lang.ExceptionInInitializerError - null

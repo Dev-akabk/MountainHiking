@@ -34,9 +34,9 @@ public class MountainManager {
 
     public Mountain get(String mountainCode) {
         String normalizedInput = normalize(mountainCode);
-        for (Mountain m : list) {
-            if (normalize(m.getMountainCode()).equalsIgnoreCase(normalizedInput)) {
-                return m;
+        for (Mountain mountain : list) {
+            if (normalize(mountain.getMountainCode()).equalsIgnoreCase(normalizedInput)) {
+                return mountain;
             }
         }
         return null;
@@ -60,9 +60,9 @@ public class MountainManager {
     public void readFromFile() {
         File file = new File(this.pathFile);
         if (!file.exists()) {
-            String msg = "MountainList.csv file not found!";
-            System.err.println(msg);
-            LogWritter.writeLog(msg);
+            String message = "MountainList.csv file not found!";
+            System.err.println(message);
+            LogWritter.writeLog(message);
             return;
         }
 
@@ -79,19 +79,19 @@ public class MountainManager {
                 if (temp.trim().isEmpty()) {
                     continue;
                 }
-                Mountain m = dataToObject(temp);
-                if (m != null) {
-                    list.add(m);
+                Mountain mountain = dataToObject(temp);
+                if (mountain != null) {
+                    list.add(mountain);
                 }
             }
         } catch (FileNotFoundException ex) {
-            String msg = "MountainList.csv not found: " + ex.getMessage();
-            System.err.println(msg);
-            LogWritter.writeLog(msg);
+            String message = "MountainList.csv not found: " + ex.getMessage();
+            System.err.println(message);
+            LogWritter.writeLog(message);
         } catch (IOException ex) {
-            String msg = "Error reading MountainList.csv: " + ex.getMessage();
-            System.err.println(msg);
-            LogWritter.writeLog(msg);
+            String message = "Error reading MountainList.csv: " + ex.getMessage();
+            System.err.println(message);
+            LogWritter.writeLog(message);
         }
     }
 
