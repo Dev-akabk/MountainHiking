@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class LogWritter {
-    public final static String LOG_PATH = "src/data/log.txt";  
+    public final static String LOG_PATH = "src/data/logs.txt";  
     
     public static void writeLog(String errorMess){
        File logFile = new File(LOG_PATH);
