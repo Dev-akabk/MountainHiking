@@ -65,7 +65,7 @@ public class Student implements Serializable {
         this.mountainCode = mountainCode;
     }
 
-    public double getTuitionFee() {
+    public double geTuitionFee() {
         return tuitionFee;
     }
 

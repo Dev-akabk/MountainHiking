@@ -8,12 +8,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-/**
- *
- * @author admin
- */
 public class LogWritter {
-    public final static String LOG_PATH = "data/log.txt";  
+    public final static String LOG_PATH = "src/data/log.txt";  
     
     public static void writeLog(String errorMess){
        File logFile = new File(LOG_PATH);
@@ -22,8 +18,7 @@ public class LogWritter {
            logFather.mkdirs();
         }
         
-        String time = LocalDateTime.now()
-            .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(LOG_PATH, true))) {
             bw.write("[" + time + "] " + errorMess);

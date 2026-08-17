@@ -70,6 +70,9 @@ public class Inputter {
             name = getString("Enter Name (Enter to keep '" + oldStudent.getName() + "'): ");
             if (name.trim().isEmpty()) {
                 name = oldStudent.getName();
+            } else if (!Acceptable.isValid(name.trim(), Acceptable.NAME_VALID)) {
+                System.out.println("Invalid name! Keeping old value: " + oldStudent.getName());
+                name = oldStudent.getName();
             }
         } else {
             name = inputLoop("Enter Name: ", Acceptable.NAME_VALID);
@@ -81,6 +84,9 @@ public class Inputter {
             phone = getString("Enter Phone (Enter to keep '" + oldStudent.getPhone() + "'): ");
             if (phone.trim().isEmpty()) {
                 phone = oldStudent.getPhone();
+            } else if (!Acceptable.isValid(phone.trim(), Acceptable.PHONE_VALID)) {
+                System.out.println("Invalid phone! Keeping old value: " + oldStudent.getPhone());
+                phone = oldStudent.getPhone();
             }
         } else {
             phone = inputLoop("Enter Phone (10 digits, start with 0): ", Acceptable.PHONE_VALID);
@@ -91,6 +97,9 @@ public class Inputter {
         if (isUpdate && oldStudent != null) {
             email = getString("Enter Email (Enter to keep '" + oldStudent.getEmail() + "'): ");
             if (email.trim().isEmpty()) {
+                email = oldStudent.getEmail();
+            } else if (!Acceptable.isValid(email.trim(), Acceptable.EMAIL_VALID)) {
+                System.out.println("Invalid email! Keeping old value: " + oldStudent.getEmail());
                 email = oldStudent.getEmail();
             }
         } else {
@@ -109,7 +118,7 @@ public class Inputter {
         double tuitionFee = 6_000_000;
         if (Acceptable.isValid(phone, Acceptable.VIETTEL_VALID)
                 || Acceptable.isValid(phone, Acceptable.VNPT_VALID)) {
-            tuitionFee *= 0.65; // Giảm 35% cho đầu số Viettel/VNPT
+            tuitionFee *= 0.65;
             System.out.println(">> Viettel/VNPT discount applied! Fee: " + String.format("%,.0f", tuitionFee));
         }
 

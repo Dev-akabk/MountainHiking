@@ -48,7 +48,7 @@ public class Menu {
     public void displayStudentList(List<Student> students) {
         if (students.isEmpty()) {
             System.out.println("No students have registered yet.");
-            return;
+            return; 
         }
         System.out.println(STUDENT_HEADER);
         for (Student student : students) {
